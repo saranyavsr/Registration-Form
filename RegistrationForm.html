@@ -215,18 +215,15 @@
         var securityAnswerOne = document.getElementById("security-answer-1").value;
         var securityTwo = document.getElementById("security-question-2").value;
         var securityAnswerTwo = document.getElementById("security-answer-2").value;
-        var interestOne = document.getElementById("interest-1").value;
-        var interestTwo = document.getElementById("interest-2").value;
-        var checked = 0;
-        
-        if(interestOne.checked == false && interestTwo.checked == false){
-            checked = 0;
-        }else{
-            checked = 1;
+        var address = document.getElementById("address").value;
+        var interest = document.getElementById("interest").value;
+    
+        if(address.length == 0){
+            error = error + " - Please specify your interest areas.\n";
         }
 
-        if(checked == 0){
-            error = error + " - Please check atleast one interest.\n";
+        if(interest.length == 0){
+            error = error + " - Please specify your interest areas.\n";
         }
 
         if(username.length == 0){
@@ -485,7 +482,7 @@
 
                             <!-- Interest -->
                             <div class="form-group">
-                                <label for="interest">Areas you maybe interested in, select one or more. </label>
+                                <label for="interest">Areas you maybe interested in, please write one or more. </label>
                                 <textarea id="interest" name="interest" required="required" cols=100 rows=5></textarea>
                             </div>
 
