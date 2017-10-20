@@ -59,6 +59,7 @@
 
     function passValidate()
     {
+        document.getElementById("passValidation").style.display = "block";
         var pass = document.getElementById("password");
         var h6 = document.getElementById("try");
         
@@ -114,7 +115,7 @@
 
         //user id
         var useridimg = document.getElementById("useridimg");
-        var userId = document.getElementById("userId");
+        var userId = document.getElementById("username");
         if(pass.value === userId.value)
         {
             useridimg.src = "wrong.png";
@@ -157,27 +158,27 @@
         
         //strength indicator text
         if(score < 21 ){
-            document.getElementById('para').style.display = "block";
+            document.getElementById("para").style.display = "block";
             strengthIndicator.innerHTML = "Very Weak";
         }
         if(score > 20 && score < 30){
-            document.getElementById('para').style.display = "block";
+            document.getElementById("para").style.display = "block";
             strengthIndicator.innerHTML = "Weak";
         }
         if(score > 29 && score < 60){
-            document.getElementById('para').style.display = "block";
+            document.getElementById("para").style.display = "block";
             strengthIndicator.innerHTML = "Medium";
         }
         if(score > 59 && score < 80){
-            document.getElementById('para').style.display = "none";
+            document.getElementById("para").style.display = "none";
             strengthIndicator.innerHTML = "Strong";
         }
         if(score > 80 && score < 100){
-            document.getElementById('para').style.display = "none";
+            document.getElementById("para").style.display = "none";
             strengthIndicator.innerHTML = "Very Strong";  
         }
         if(score >= 100){
-            document.getElementById('para').style.display = "none";
+            document.getElementById("para").style.display = "none";
             strengthIndicator.innerHTML = "Excellent";    
         }
         var rePass = document.getElementById("repassword");
@@ -262,6 +263,12 @@
         }
         submitAjax();
         return false;
+
+        document.getElementById("registration-form").reset();
+        document.getElementById("strength-indicator").innerHTML = "";
+        document.getElementById("strength-meter").value = 0;
+        document.getElementById("para").style.display = "none";
+        document.getElementById("passValidation").style.display = "none";
     }
 
     function validateEmail(email){
@@ -317,7 +324,7 @@
         }
         if(originalQuestion.value == question){
             error.style.color="red";
-            error.innerHTML="Both questions cannot be same"
+            error.innerHTML="Both questions cannot be same";
         }else{
             error.innerHTML="";
         }
@@ -325,8 +332,10 @@
 
     function clearForm(){
         document.getElementById("registration-form").reset();
-        document.getElementById("password-strength").reset();
-        document.getElementById("password-checker").reset();
+        document.getElementById("strength-indicator").innerHTML = "";
+        document.getElementById("strength-meter").value = 0;
+        document.getElementById("para").style.display = "none";
+        document.getElementById("passValidation").style.display = "none";
         var errors = document.getElementsByClassName("error");
         for(var i = errors.length - 1; i >= 0; --i){
             errors[i].innerHTML = "";
@@ -335,6 +344,7 @@
 
     function saveToSessionStorage(){
         var registrationForm = document.getElementById("registration-form");
+
         for (var i = 0; i < registrationForm.elements.length; i++) {
             if(registrationForm.elements[i].type!= "submit" && registrationForm.elements[i].value!= null && registrationForm.elements[i].value!="Cancel"){
                 var field = registrationForm.elements[i];
@@ -345,6 +355,7 @@
             }
         }
         alert("Stored data to session!");
+        clearForm();
     }
 
 
@@ -413,7 +424,7 @@
                                 </progress>
 
                                 <span id="strength-indicator"></span>
-                                <p id="para" >Must be between 7-20 characters in length and include 4 alpha characters; 1 numeric character (0,9) or 1 special character(!,#,$,%). The password is case sensitive and must not contain spaces or be the same as your userID</p>
+                                <p id="para">Must be between 7-20 characters in length and include 4 alpha characters; 1 numeric character (0,9) or 1 special character(!,#,$,%). The password is case sensitive and must not contain spaces or be the same as your userID</p>
                     
                             </div>
                             <!-- Verify password -->
@@ -491,7 +502,7 @@
                             <!-- Form button -->
                             <div class="form-buttons">
                                 <button type="button" class="submit cancel-button" onclick="clearForm()" value="Cancel">Cancel</button>
-                                <input type="submit" class="submit" id="submit" value="Register" onclick="saveToSessionStorage();>
+                                <input type="submit" class="submit" id="submit" value="Register" onclick="saveToSessionStorage()">
                                 
                             </div>
                             <span id="registration-text"></span>
